@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * This is a repository interface for Recipe
+ */
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     // No need to add any method here for basic CRUD operations,

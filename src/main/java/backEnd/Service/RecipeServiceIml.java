@@ -17,13 +17,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class represent the all the business logic related to the recipe
+ */
 @Service
 public class RecipeServiceIml implements RecipeService {
-    // in the 1 stage we just store it here
 
+    // connect the Recipe repository
     @Autowired
     private RecipeRepository recipeRepository;
 
+    // connect the User repository
     @Autowired
     private UserRepository userRepository;
 
@@ -66,6 +70,11 @@ public class RecipeServiceIml implements RecipeService {
         return new RecipeResponseDTO(savedRecipe.getId());
     }
 
+    /**
+     * This method to return if the recipe exist in the database
+     * @param id Recipe id
+     * @return Optional<Recipe>
+     */
     @Override
     public Optional<Recipe> getSaveRecipe(long id) {
         return recipeRepository.findById(id);
@@ -75,6 +84,7 @@ public class RecipeServiceIml implements RecipeService {
     public boolean deleteRecipe(long id) {
         Optional<Recipe> recipeToBeDelete = recipeRepository.findById(id);
 
+        //if recipeToBeDelete is present meaning the recipe exist
         if(recipeToBeDelete.isPresent() && isUserRecipeAuthor(id)){
             recipeRepository.deleteById(id);
             return true;
@@ -82,34 +92,13 @@ public class RecipeServiceIml implements RecipeService {
         return false;
     }
 
+
     @Override
-    @Transactional
+    @Transactional//ensure data integrity and consistency across multiple data manipulation operations.
     public void updateRecipe(long id,Recipe importRecipe) {
-//        // Obtain the currently authenticated user's username or ID
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUsername = authentication.getName(); // Or use a custom method to get the user ID depending on your setup
-//
         // Fetch the recipe to be updated
         Recipe recipeToBeUpdate = recipeRepository.getReferenceById(id);
-//
-//        // Assuming you have a method in your recipe or user repository to get the owner's username/ID
-//        // This part depends on how your entities and relationships are set up
-//        String ownerUsername = recipeToBeUpdate.getUser().getEmail(); // This is an illustrative method
-//
-//        // Check if the current user is the owner of the recipe
-//        if (currentUsername.equals(ownerUsername)) {
-//            //Recipe recipeToBeUpdate = recipeRepository.getById(id);
-//            recipeToBeUpdate.setName(importRecipe.getName());
-//            recipeToBeUpdate.setDescription(importRecipe.getDescription());
-//            recipeToBeUpdate.setCategory(importRecipe.getCategory());
-//            recipeToBeUpdate.setDirections(importRecipe.getDirections());
-//            recipeToBeUpdate.setIngredients(importRecipe.getIngredients());
-//            recipeToBeUpdate.setDate(LocalDateTime.now());
-//
-//            //at the end it has to be saved in the repository in order to be updated
-//            recipeRepository.save(recipeToBeUpdate);
-//        }
-
+        // update all the necessary fields
         recipeToBeUpdate.setName(importRecipe.getName());
         recipeToBeUpdate.setDescription(importRecipe.getDescription());
         recipeToBeUpdate.setCategory(importRecipe.getCategory());
@@ -121,6 +110,7 @@ public class RecipeServiceIml implements RecipeService {
         recipeRepository.save(recipeToBeUpdate);
     }
 
+
     @Override
     public List<Recipe> getAllRecipeByCategory(String category) {
         // this sort instance is for sorting the recipe by date in descending order
@@ -128,6 +118,11 @@ public class RecipeServiceIml implements RecipeService {
         return recipeRepository.findAllByCategoryIgnoreCase(category,sort);
     }
 
+    /**
+     *
+     * @param name
+     * @return all the recipe that contains the name input
+     */
     @Override
     public List<Recipe> getAllRecipeByName(String name) {
         // this sort instance is for sorting the recipe by date in descending order
@@ -137,8 +132,10 @@ public class RecipeServiceIml implements RecipeService {
 
     /**
      * Check if the current user is the recipe author
+     * it is a helper function to make the code more manageable
      * @param id
-     * @return
+     * @return a boolean value , true of user exist else negative
+     *
      */
     @Override
     public boolean isUserRecipeAuthor(long id) {

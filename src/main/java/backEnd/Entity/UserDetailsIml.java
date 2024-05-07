@@ -10,6 +10,7 @@ import java.util.Collection;
  */
 
 public class UserDetailsIml implements UserDetails {
+    // each user has 2 main fields the email and password
     private final String email;
     private final String password;
 

@@ -6,6 +6,10 @@ import backEnd.Entity.Recipe;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This is a service interface
+ * It provides all the necessary methods for recipe
+ */
 public interface RecipeService {
 
     //store the recipe
