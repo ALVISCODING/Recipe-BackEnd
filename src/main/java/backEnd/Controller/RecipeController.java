@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 public class RecipeController {
+
     @Autowired
     private RecipeServiceIml recipeService;
 
@@ -92,29 +93,6 @@ public class RecipeController {
      */
     @PutMapping("/api/recipe/{id}")
     public ResponseEntity<?> updateRecipe(@PathVariable("id") long id,@Valid  @RequestBody Recipe updatedRecipe){
-
-//
-//        // Get the current user
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
-//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-//        }
-//
-//        String currentUsername = ((UserDetails) authentication.getPrincipal()).getUsername();
-//
-//        // Attempt to find the current user in the database
-//        UserDetails currentUserDetails;
-//        try {
-//            currentUserDetails = userDetailsServiceIml.loadUserByUsername(currentUsername);
-//        } catch (UsernameNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-//        }
-//
-//        // Assuming your UserDetailsService implementation returns a UserDetails that can be cast to your User entity
-//        User currentUser = (User) currentUserDetails; // This casting depends on your implementation
-
-
-
         // Attempt to fetch the recipe to update
         Optional<Recipe> tempRecipeOpt = recipeService.getSaveRecipe(id);
         if (tempRecipeOpt.isEmpty()) {

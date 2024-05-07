@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class for managing user-related actions such as registration.
+ * This class handles HTTP requests for user management.
+ */
 @RestController
 public class UserController {
 
-        private static final Logger logger = (Logger) LoggerFactory.getLogger(UserController.class);
+        //private static final Logger logger = (Logger) LoggerFactory.getLogger(UserController.class);
 
         @Autowired
         private UserDetailsServiceIml userDetailsServiceIml;
@@ -23,6 +27,15 @@ public class UserController {
         public UserController(UserDetailsServiceIml userDetailsServiceIml) {
             this.userDetailsServiceIml = userDetailsServiceIml;
         }
+
+    /**
+     * Endpoint for registering a new user. The user's data is validated before saving.
+     * If the user is successfully saved, it returns a 200 OK response.
+     * Otherwise, it returns a 400 Bad Request response.
+     *
+     * @param user The user data to register. Must pass validation constraints.
+     * @return ResponseEntity indicating the result of the registration operation.
+     */
 
         @PostMapping("/api/register")
         public ResponseEntity<?> registerUser(@RequestBody @Validated User user) {

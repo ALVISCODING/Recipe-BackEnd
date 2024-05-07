@@ -11,6 +11,10 @@ import lombok.Data;
 import jakarta.persistence.*;
 
 
+/**
+ * This is an User Entity
+ * It represents the user who created the recipe
+ */
 @Entity
 @Data
 @Table(name = "users")  // Renamed to avoid conflict with SQL reserved keyword "USER"
@@ -21,8 +25,8 @@ public class User {
     @JsonIgnore
     private long id;
 
+    // the email must follow a specific patten
     @NotBlank
-    //@Email(message = "Email should be valid")
     @Pattern(regexp = ".+@.+\\..+")
     private String email;
 
