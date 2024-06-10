@@ -59,22 +59,38 @@ A Recipe Management System built using Java and Spring Boot, designed to store a
 ## API Endpoints
 
 ### RecipeController
+    POST /api/recipe/new: Create a new recipe.
+    GET /api/recipe/{id}: Get a recipe by ID.
+    GET /api/recipe/search: Search recipes by category or name.
+    PUT /api/recipe/{id}: Update an existing recipe.
+    DELETE /api/recipe/{id}: Delete a recipe by ID.
 
-- **POST /api/recipe/new**: Create a new recipe.
-    ```java
-    @PostMapping("/api/recipe/new")
-    public ResponseEntity<?> createRecipe(@Valid @RequestBody Recipe newRecipe) {
-        return ResponseEntity.ok().body(recipeService.saveRecipe(newRecipe));
-    }
-    ```
+### UserController
 
-- **GET /api/recipe/{id}**: Get a recipe by ID.
-    ```java
-    @GetMapping("/api/recipe/{id}")
-    public ResponseEntity<?> getRecipe(@PathVariable("id") long id) {
-        Optional<Recipe> recipe = recipeService.getSaveRecipe(id);
-        if (recipe.isPresent()) {
-            return ResponseEntity.ok(recipe);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    POST /api/register: Register a new user.
+
+    ## Security
+
+Security configuration is provided by the `SecurityConfig` class, where endpoints `/api/register` and `/actuator/shutdown` are configured to be accessible without authentication.
+
+Configure security settings in `application.properties`.
+
+## Database
+
+Configure H2 database settings in `application.properties`.
+
+## Project Lombok
+
+Ensure Lombok plugin is installed in your IDE.
+
+## Contributing
+
+Fork the repository and create a pull request with your changes.
+
+
+## Acknowledgements
+
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Project Lombok](https://projectlombok.org/)
+- [H2 Database](http://www.h2database.com/html/main.html)
+
