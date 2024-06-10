@@ -69,7 +69,7 @@ A Recipe Management System built using Java and Spring Boot, designed to store a
 
     POST /api/register: Register a new user.
 
-    ## Security
+### Security
 
 Security configuration is provided by the `SecurityConfig` class, where endpoints `/api/register` and `/actuator/shutdown` are configured to be accessible without authentication.
 
