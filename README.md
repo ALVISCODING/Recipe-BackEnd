@@ -1,77 +1,80 @@
-Recipe Management System
+# Recipe Management System
 
-This project is a Recipe Management System designed to store and manage your favorite recipes. The system is built using Java and Spring Boot, incorporating various backend development concepts such as JSON, REST API, Spring Boot Security, H2 database, LocalDateTime, and Project Lombok.
-Features
+A Recipe Management System built using Java and Spring Boot, designed to store and manage your favorite recipes.
 
-    CRUD Operations: Create, read, update, and delete recipes.
-    Secure Access: Implement Spring Boot Security for secure access to the API.
-    In-Memory Database: Utilize H2 database for storing recipes.
-    REST API: Expose RESTful endpoints for interacting with recipes.
-    Date and Time Handling: Use LocalDateTime for managing timestamps.
-    Simplified Code: Use Project Lombok to reduce boilerplate code.
+## Features
 
-Technologies Used
+- **CRUD Operations**: Create, read, update, and delete recipes.
+- **Secure Access**: Spring Boot Security for API security.
+- **In-Memory Database**: H2 database for storing recipes.
+- **REST API**: Expose RESTful endpoints for recipe interactions.
+- **Date and Time Handling**: Manage timestamps with LocalDateTime.
+- **Simplified Code**: Reduce boilerplate with Project Lombok.
 
-    Java: Programming language for the application.
-    Spring Boot: Framework for building the application.
-    Spring Boot Security: For securing the application.
-    H2 Database: In-memory database for development and testing.
-    JSON: For data exchange.
-    REST API: For creating a RESTful service.
-    LocalDateTime: For handling date and time.
-    Project Lombok: For reducing boilerplate code.
+## Technologies
 
-    Getting Started
-Prerequisites
+- **Language**: Java
+- **Framework**: Spring Boot
+- **Security**: Spring Boot Security
+- **Database**: H2 Database
+- **Data Format**: JSON
+- **API**: REST API
+- **Date and Time**: LocalDateTime
+- **Code Simplification**: Project Lombok
 
-    JDK 8 or higher
-    Gradle
+## Getting Started
 
-Installation
+### Prerequisites
 
-    Clone the repository:
+- JDK 8 or higher
+- Gradle
 
-    bash
+### Installation
 
-git clone https://github.com/ALVISCODING/Recipe-BackEnd.git
-cd recipe-management-system
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/recipe-management-system.git
+    ```
 
-Build the project:
+2. Navigate to the project directory:
+    ```bash
+    cd recipe-management-system
+    ```
 
-bash
+3. Build the project:
+    ```bash
+    ./gradlew build
+    ```
 
-./gradlew build
-
-Run the application:
-
-bash
-
+4. Run the application:
+    ```bash
     ./gradlew bootRun
+    ```
 
-Access
+### Access
 
-    H2 console: http://localhost:8080/h2-console
-    API endpoints: http://localhost:8080/api/recipes
+- H2 console: `http://localhost:8080/h2-console`
+- API endpoints: `http://localhost:8080/api/recipes`
 
-API Endpoints
-RecipeController
+## API Endpoints
 
-    POST /api/recipe/new: Create a new recipe.
-    GET /api/recipe/{id}: Get a recipe by ID.
-    GET /api/recipe/search: Search recipes by category or name.
-    PUT /api/recipe/{id}: Update an existing recipe.
-    DELETE /api/recipe/{id}: Delete a recipe by ID.
+### RecipeController
 
-UserController
+- **POST /api/recipe/new**: Create a new recipe.
+    ```java
+    @PostMapping("/api/recipe/new")
+    public ResponseEntity<?> createRecipe(@Valid @RequestBody Recipe newRecipe) {
+        return ResponseEntity.ok().body(recipeService.saveRecipe(newRecipe));
+    }
+    ```
 
-    POST /api/register: Register a new user.
-
-Security
-
-Configure security settings in application.properties.
-Database
-
-Configure H2 database settings in application.properties.
-Project Lombok
-
-Ensure Lombok plugin is installed in your IDE.
+- **GET /api/recipe/{id}**: Get a recipe by ID.
+    ```java
+    @GetMapping("/api/recipe/{id}")
+    public ResponseEntity<?> getRecipe(@PathVariable("id") long id) {
+        Optional<Recipe> recipe = recipeService.getSaveRecipe(id);
+        if (recipe.isPresent()) {
+            return ResponseEntity.ok(recipe);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
