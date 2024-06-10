@@ -1,4 +1,4 @@
-<h1>Recipe Management System<h1>
+Recipe Management System
 
 This project is a Recipe Management System designed to store and manage your favorite recipes. The system is built using Java and Spring Boot, incorporating various backend development concepts such as JSON, REST API, Spring Boot Security, H2 database, LocalDateTime, and Project Lombok.
 Features
