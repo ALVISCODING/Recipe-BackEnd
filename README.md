@@ -33,7 +33,7 @@ Installation
 
     bash
 
-git clone https://github.com/your-username/recipe-management-system.git
+git clone https://github.com/ALVISCODING/Recipe-BackEnd.git
 cd recipe-management-system
 
 Build the project:
