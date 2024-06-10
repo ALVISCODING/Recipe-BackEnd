@@ -33,7 +33,7 @@ A Recipe Management System built using Java and Spring Boot, designed to store a
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/recipe-management-system.git
+    git clone https://github.com/ALVISCODING/Recipe-BackEnd.git
     ```
 
 2. Navigate to the project directory:
